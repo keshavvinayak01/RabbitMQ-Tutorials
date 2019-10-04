@@ -1,5 +1,5 @@
-import pika
 import sys
+import pika
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host = 'localhost')
@@ -11,7 +11,7 @@ channel.exchange_declare(
     exchange_type = 'direct'
 )
 
-severity = sys.argv[1] if len(sys.argv > 1) else 'info'
+severity = sys.argv[1] if len(sys.argv) > 1 else 'info'
 
 message = ' '.join(sys.argv[2:]) or 'Hello world'
 

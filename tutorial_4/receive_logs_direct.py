@@ -1,5 +1,5 @@
-import pika
 import sys
+import pika
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='localhost')
@@ -24,13 +24,13 @@ if not severities:
 for severity in severities:
     channel.queue_bind(
         exchange = 'direct_logs',
-        queue_name = queue_name,
+        queue = queue_name,
         routing_key = severity
     )
 
 print(' [x] Waiting for logs. To exit press CTRL+C')
 
-def callbacks(ch, method, properties, body):
+def callback(ch, method, properties, body):
     print(" [x] %r:%r" % (method.routing_key, body))
 
 
